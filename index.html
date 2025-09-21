@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>丐版主页</title>
+    <style>body{
+        text-align: center;
+        background-color: gray;
+        color: white;}
+        .box{
+            width: 500px;
+            height: 250px;
+            background-color: rgba(0,0,0,.7);
+            margin: 10px auto;
+            border-radius: 20px;
+        }
+        .bo{
+            width: 250px;
+            height: 75px;
+            background-color: rgba(0,0,0,.7);
+            margin: 10px auto;
+            border-radius: 20px;
+        }
+        </style>
+</head>
+
+<body>
+    <h1><i>awa</i></h1>
+<p>hi 繁星</p>
+<div class="box">
+<h1>繁星简介</h1>
+<p>繁星是个欣欣向荣的服务器</p>
+<p>这里玩家核平</p>
+<p>物资丰厚</p>
+<p>大牢友好</p>
+<p>想必你已经迫不及待了</p>
+
+</div>
+<div class="bo">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>我的世界服务器状态查询</title>
+  
+</head>
+<body>
+    <div class="server-status">
+        服务器地址：fxzj.fun<br>
+        服务器状态：<span id="serverStatus">加载中...</span><br>
+        当前在线人数：<span id="playerCount">加载中...</span>
+    </div>
+
+    <!-- 发送API请求的核心脚本 -->
+    <script>
+        // 1. 配置API地址和服务器参数（MCSrvStatus API支持MOTD和人数查询）
+        const apiUrl = "https://api.mcsrvstat.us/2/fxzj.fun"; // 直接传入服务器地址
+
+        // 2. 发送请求到API
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) throw new Error("请求失败");
+                return response.json(); // 解析API返回的JSON数据
+            })
+            .then(data => {
+                // 3. 处理返回数据，更新页面显示
+                const statusElem = document.getElementById("serverStatus");
+                const countElem = document.getElementById("playerCount");
+
+                if (data.online) {
+                    statusElem.textContent = "我说不在线你信吗";
+                    // 显示"当前人数/最大人数"，若未返回最大人数则只显示当前
+                    const players = data.players;
+                    countElem.textContent = `${players.online}${players.max ? '/' + players.max : ''} 人`;
+                } else {
+                    statusElem.textContent = "❌ 离线";
+                    countElem.textContent = "0 人";
+                }
+            })
+            .catch(error => {
+                // 4. 处理请求错误
+                document.getElementById("serverStatus").textContent = "❌ 查询失败";
+                document.getElementById("playerCount").textContent = "未知";
+                console.log("错误原因：", error);
+            });
+    </script>
+</body>
+</html>
+</div>
+
+
+</body>
+
+
+</html>
